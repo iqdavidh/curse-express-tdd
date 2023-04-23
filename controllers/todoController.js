@@ -4,7 +4,10 @@ const newTodo=require("../tests/mock-data/newTodo.json");
 
 const todoController = {
   createTodo: (req, res) => {
-    todo.create(); // not reaal crate
+     if(!req.body){
+       throw new  Error("body not found");
+     }
+    todo.create(req.body); // not reaal crate
     res.status(201).json(newTodo)
   },
   getTodo: (req, res) => {

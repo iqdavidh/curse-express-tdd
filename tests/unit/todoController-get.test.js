@@ -28,7 +28,7 @@ describe("TodoController.get", () => {
     
     const body=res._getJSONData();
     expect(body).toBeTruthy();
-    expect(body).toMatchObject(mockData);
+    expect(body).toStrictEqual(mockData);
     
   });
   

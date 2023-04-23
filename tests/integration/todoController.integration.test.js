@@ -27,6 +27,7 @@ describe(endpointUrl, () => {
     
     expect(response.statusCode).toBe(200);
     const data=response.body;
+    
  
     expect(data).toBeTruthy();
     expect(Array.isArray(data)).toBe(true);
