@@ -20,6 +20,15 @@ describe(endpointUrl, () => {
     expect(response.body.done).toBe(newTodo.done);
   });
   
+  it("error handler - no body POST " + endpointUrl, async () => {
+    const response = await request(app)
+      .post(endpointUrl)
+      .send();
+    expect(response.statusCode).toBe(500);
+    expect(response.body.message).toBeTruthy();
+ 
+  });
+  
   it("Get " + endpointUrl, async () => {
     const response = await request(app)
       .get(endpointUrl)

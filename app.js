@@ -5,7 +5,13 @@ const todoRoutes = require("./routes/todoRoutes");
 app.use(express.json());
 
 app.use("/todos", todoRoutes);
-app.get("/", (req, res) => {
+
+app.use((error, req, res, next) => {
+  res.status(500).json({ message: error.message });
+});
+
+
+app.get("/", (req, res, next) => {
   res.json("Hello world!");
 });
 
