@@ -19,13 +19,20 @@ const todoController = {
   },
   getTodo: (req, res,next) => {
     try {
-      todo.create(); // not reaal crate
       const allTodo = todo.get();
       res.status(200).json(allTodo)
     }catch (error){
       next(error)
     }
-   
+  },
+  getTodoFromId: async (req, res,next) => {
+    try {
+      const id = req.params.id;
+      const item= await todo.getFromId(id);
+      res.status(200).json(item)
+    }catch (error){
+      next(error)
+    }
   }
 }
 module.exports = todoController;

@@ -5,6 +5,14 @@ const todo = {
   },
   get:()=>{
     return allTodo;
+  },
+  getFromId: async (id)=>{
+    return {
+      id,
+      "title": "item1",
+      "done": false
+    
+    }
   }
 }
 
