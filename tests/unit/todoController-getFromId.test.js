@@ -11,28 +11,15 @@ let req, res, next;
 beforeEach(()=>{
   req=httpMocks.createRequest();
   res= httpMocks.createResponse();
-  next= httpMocks.createResponse();
+  next= jest.fn();
 })
 describe("TodoController.getFromID", () => {
-  it("should have a getTodoFromId function", () => {
-    expect(typeof todoController.getTodoFromId).toBe("function");
-  });
   
-  it("should call  getTodoFromId",  async() => {
+  it("should throw error",  async() => {
     req.params.id=666;
+    todoModel.getFromId.mockReturnValue(Promise.reject({msg:"isTest"}))
     await todoController.getTodoFromId(req, res, next);
-    expect(todoModel.getFromId).toBeCalledWith(req.params.id);
-  });
-  
-  it("should return  200 response code", async() => {
-    req.params.id=666;
-    await todoController.getTodoFromId(req, res);
-    expect(res.statusCode).toBe(200);
-    
-    const body=res._getJSONData();
-    expect(body).toBeTruthy();
-    
-    
+    expect(next).toHaveBeenCalledWith({msg:"isTest"})
   });
   
   

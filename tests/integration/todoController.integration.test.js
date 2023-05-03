@@ -3,7 +3,7 @@ const newTodo = require("../mock-data/newTodo.json");
 const app = require("../../app");
 const todoModel = require("../../model/todo");
 
-const endpointUrl = "/todos/";
+const endpointUrl = "/todos";
 
 const mockData=[{title:'2', done:true}];
 todoModel.get = jest.fn();
@@ -42,4 +42,20 @@ describe(endpointUrl, () => {
     expect(Array.isArray(data)).toBe(true);
     expect(data.length).toBe(mockData.length);
   });
+  
+  it("Get item" + endpointUrl, async () => {
+    const response = await request(app)
+      .get(endpointUrl +`/1`)
+      .send();
+    
+    expect(response.statusCode).toBe(200);
+    const data=response.body;
+    
+    
+    expect(data).toBeTruthy();
+    expect(data.id).toBe("1");
+  });
+  
+  
+ 
 });
